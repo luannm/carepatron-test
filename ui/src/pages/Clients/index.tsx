@@ -7,8 +7,10 @@ import ClientTable from './ClientTable';
 import { getClients } from '../../services/api';
 import CreateClientDialog from './components/CreateClientDialog';
 import useDebounce from '../../hooks/use-debounce';
+import { useTranslation } from 'react-i18next';
 
 function Clients() {
+	const { t } = useTranslation();
 	const [showDialog, setShowDialog] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
 
@@ -38,7 +40,7 @@ function Clients() {
 		<>
 			<Page>
 				<Typography variant='h4' sx={{ textAlign: 'start' }}>
-					Clients
+					{t('title', 'Clients')}
 				</Typography>
 				<Stack direction={['column', 'row']} gap={[2, 0]} justifyContent='space-between' sx={{ mt: 3 }}>
 					<TextField
@@ -51,7 +53,7 @@ function Clients() {
 						onChange={(evt) => setSearchTerm(evt.target.value)}
 					/>
 					<Button variant='contained' onClick={() => setShowDialog(true)}>
-						Create New Client
+						{t('create-client-btn', 'Create New Client')}
 					</Button>
 				</Stack>
 				<Paper elevation={0} sx={{ margin: 'auto', marginTop: 2 }}>

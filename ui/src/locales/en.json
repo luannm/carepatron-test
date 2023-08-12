@@ -1,0 +1,7 @@
+{
+	"title": "Clients",
+	"create-client-btn": "Create New Client",
+	"client-table-column-name": "Name",
+	"client-table-column-phone": "Phone Number",
+	"client-table-column-email": "Email"
+}
