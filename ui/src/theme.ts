@@ -15,7 +15,7 @@ const theme = createTheme({
 					boxShadow: 'none',
 					textTransform: 'initial',
 					fontWeight: 'bold',
-					padding: '16px',
+					padding: '12px 16px',
 					lineHeight: 'normal',
 					borderRadius: '8px',
 				},

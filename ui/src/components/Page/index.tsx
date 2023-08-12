@@ -1,9 +1,6 @@
-import React from "react";
+import { Box } from '@mui/material';
+import React from 'react';
 
 export default function Page({ children }: { children?: React.ReactNode }) {
-  return (
-    <div style={{ margin: "auto", marginTop: 24, maxWidth: "700px" }}>
-      {children}
-    </div>
-  );
+	return <Box sx={{ marginX: [3, 'auto'], marginTop: 3, maxWidth: '700px' }}>{children}</Box>;
 }
