@@ -50,9 +50,12 @@ function Clients() {
 							sx: { background: 'white' },
 							endAdornment: <SearchIcon />,
 						}}
+						inputProps={{
+							'data-testid': 'search-input',
+						}}
 						onChange={(evt) => setSearchTerm(evt.target.value)}
 					/>
-					<Button variant='contained' onClick={() => setShowDialog(true)}>
+					<Button variant='contained' data-testid='btn-create' onClick={() => setShowDialog(true)}>
 						{t('create-client-btn', 'Create New Client')}
 					</Button>
 				</Stack>

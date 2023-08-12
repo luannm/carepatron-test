@@ -3,5 +3,6 @@
 	"create-client-btn": "Create New Client",
 	"client-table-column-name": "Name",
 	"client-table-column-phone": "Phone Number",
-	"client-table-column-email": "Email"
+	"client-table-column-email": "Email",
+	"client-dialog-title": "Create New Client"
 }

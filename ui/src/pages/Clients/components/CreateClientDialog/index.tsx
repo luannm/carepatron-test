@@ -20,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { createClient } from '../../../../services/api';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 	show: boolean;
@@ -35,6 +36,7 @@ enum Steps {
 const STEP_LABELS = ['Personal details', 'Contact details'];
 
 const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
+	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
 
 	const [activeStep, setActiveStep] = useState(Steps.PERSONAL_DETAILS);
@@ -45,6 +47,7 @@ const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
 		formState: { isValid },
 		trigger,
 		handleSubmit,
+		watch,
 	} = useForm<IClient>({
 		mode: 'onChange',
 		//@ts-ignore
@@ -70,6 +73,11 @@ const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
 			})
 		),
 	});
+
+	const firstName = watch('firstName');
+	const lastName = watch('lastName');
+
+	console.log('===', firstName, lastName, isValid);
 
 	const displayFields: Array<{ label: string; fieldName: keyof IClient; isVisible: boolean }> = useMemo(
 		() => [
@@ -129,9 +137,9 @@ const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
 	};
 
 	return (
-		<Dialog open={show} maxWidth='sm' fullWidth>
+		<Dialog open={show} maxWidth='sm' fullWidth data-testid='create-client-dialog'>
 			<DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-				Create New Client
+				{t('client-dialog-title', 'Create New Client')}
 				<IconButton
 					aria-label='close'
 					onClick={onClose}
@@ -163,10 +171,14 @@ const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
 									render={({ field, fieldState: { error } }) => (
 										<TextField
 											size='small'
+											data-testid={`field-${fieldName}`}
 											fullWidth
 											label={label}
 											error={Boolean(error)}
 											helperText={error?.message}
+											inputProps={{
+												'data-testid': `input-${fieldName}`,
+											}}
 											{...field}
 										/>
 									)}
@@ -180,6 +192,7 @@ const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
 						sx={{ visibility: activeStep > 0 ? 'visible' : 'hidden' }}
 						startIcon={<KeyboardBackspaceIcon />}
 						onClick={handleBack}
+						data-testid='btn-back'
 					>
 						Back
 					</Button>
@@ -188,6 +201,7 @@ const CreateClientDialog: React.FC<Props> = ({ show, onClose, onSuccess }) => {
 						onClick={handleContinue}
 						disabled={!isValid || loading}
 						type={activeStep === Steps.CONTACT_DETAILS ? 'submit' : 'button'}
+						data-testid='btn-continue'
 					>
 						{activeStep === Steps.CONTACT_DETAILS ? 'Create client' : 'Continue'}
 					</Button>

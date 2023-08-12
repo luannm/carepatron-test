@@ -4,12 +4,13 @@ export interface IProps {
 	client: IClient;
 }
 
-export default function ClientListItem({ client }: IProps) {
+export default function ClientRow({ client }: IProps) {
 	const { id, firstName, lastName, email, phoneNumber } = client;
 
 	return (
 		<TableRow
 			key={id}
+			data-testid='client-row'
 			sx={{
 				'&:last-child td, &:last-child th': { border: 0 },
 				cursor: 'pointer',

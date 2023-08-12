@@ -20,7 +20,7 @@ export default function BasicTable({ clients }: { clients: IClient[] }) {
 	}, [clients, page]);
 
 	return (
-		<TableContainer sx={{ maxWidth: '100%' }}>
+		<TableContainer data-testid='client-table' sx={{ maxWidth: '100%' }}>
 			<Table sx={{ minWidth: 400 }} aria-label='simple table'>
 				<TableHead>
 					<TableRow>
